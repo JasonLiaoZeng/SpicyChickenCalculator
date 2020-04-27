@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 
 public class MainActivity extends AppCompatActivity {
-        String calculate(String answer) {
+        static String calculate(String answer) {
             int a = answer.indexOf("+");
             int s = answer.indexOf("-");
             int m = answer.indexOf("*");
@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
             if (lB != -1 && rB != -1) {
                 String bracketAnswer = answer.substring(lB + 1, rB) + "=";
                 bracketAnswer=calculate(bracketAnswer);
-                answer = answer.substring(0, lB) + (bracketAnswer) + answer.substring(rB + 1, e) + "=";
+                answer = answer.substring(0, lB) + bracketAnswer + answer.substring(rB + 1, e) + "=";
                 return calculate(answer);
             }
             else if (m != -1 || d != -1) {
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if (m < d) {
                     for (int i = (m - 1); i >= 0; i--) {
-                        if (answer.charAt(i) == '+' || answer.charAt(i) == '-' || answer.charAt(i) == '*' || answer.charAt(i) == '/') {
+                        if (answer.charAt(i) == '+' || answer.charAt(i) == '-') {
                             firstNumber = new StringBuffer(firstNumber).reverse().toString();
                             leftBound = i+1;
                             break;
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 else
                 {
                     for (int i = (d - 1); i >= 0; i--) {
-                        if (answer.charAt(i) == '+' || answer.charAt(i) == '-' || answer.charAt(i) == '*' || answer.charAt(i) == '/') {
+                        if (answer.charAt(i) == '+' || answer.charAt(i) == '-') {
                             firstNumber = new StringBuffer(firstNumber).reverse().toString();
                             leftBound = i+1 ;
                             break;
@@ -101,11 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if (a < s) {
                     for (int i = (a - 1); i >= 0; i--) {
-                        if (answer.charAt(i) == '+' || answer.charAt(i) == '-' || answer.charAt(i) == '*' || answer.charAt(i) == '/') {
-                            firstNumber = new StringBuffer(firstNumber).reverse().toString();
-                            leftBound = i + 1;
-                            break;
-                        } else if (i == 0) {
+                        if (i == 0) {
                             firstNumber = firstNumber.concat(answer.substring(i, i + 1));
                             firstNumber = new StringBuffer(firstNumber).reverse().toString();
                             leftBound = 0;
@@ -116,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     for (int i = (a + 1); i <= e; i++) {
-                        if (answer.charAt(i) == '+' || answer.charAt(i) == '-' || answer.charAt(i) == '*' || answer.charAt(i) == '/' || i == e) {
+                        if (answer.charAt(i) == '+' || answer.charAt(i) == '-' || i == e) {
                             rightBound = i;
                             break;
                         } else {
@@ -125,17 +121,13 @@ public class MainActivity extends AppCompatActivity {
                     }
                     double aA = Double.parseDouble(firstNumber) + Double.parseDouble(secondNumber);
                     String additionAnswer = Double.toString(aA);
-                    answer = answer.substring(0, leftBound) + additionAnswer + answer.substring(rightBound, e) + "=";
+                    answer = additionAnswer + answer.substring(rightBound, e) + "=";
                     return calculate(answer);
                 }
                 else {
 
                     for (int i = (s - 1); i >= 0; i--) {
-                        if (answer.charAt(i) == '+' || answer.charAt(i) == '-' || answer.charAt(i) == '*' || answer.charAt(i) == '/') {
-                            firstNumber = new StringBuffer(firstNumber).reverse().toString();
-                            leftBound = i + 1;
-                            break;
-                        } else if (i == 0) {
+                       if (i == 0) {
                             firstNumber = firstNumber.concat(answer.substring(i, i + 1));
                             firstNumber = new StringBuffer(firstNumber).reverse().toString();
                             leftBound = 0;
@@ -146,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     for (int i = (s + 1); i <= e; i++) {
-                        if (answer.charAt(i) == '+' || answer.charAt(i) == '-' || answer.charAt(i) == '*' || answer.charAt(i) == '/' || i == e) {
+                        if (answer.charAt(i) == '+' || answer.charAt(i) == '-'|| i == e) {
                             firstNumber = new StringBuffer(firstNumber).reverse().toString();
                             rightBound = i;
                             break;
@@ -157,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
 
                     double sA = Double.parseDouble(firstNumber) - Double.parseDouble(secondNumber);
                     String subtractionAnswer = Double.toString(sA);
-                    answer = answer.substring(0, leftBound) + subtractionAnswer + answer.substring(rightBound, e) + "=";
+                    answer = subtractionAnswer + answer.substring(rightBound, e) + "=";
                     return calculate(answer);
                 }
             }
