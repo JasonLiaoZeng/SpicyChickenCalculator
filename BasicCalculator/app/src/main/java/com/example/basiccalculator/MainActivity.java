@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
                 String secondNumber = "";
                 int rightBound = 0;
 
-                if (m < d) {
+                if (m < d && m>0||d==-1) {
                     for (int i = (m - 1); i >= 0; i--) {
                         if (answer.charAt(i) == '+' || answer.charAt(i) == '-') {
                             firstNumber = new StringBuffer(firstNumber).reverse().toString();
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
                 String secondNumber = "";
                 int rightBound = 0;
 
-                if (a < s) {
+               if (a < s || s==-1) {
                     for (int i = (a - 1); i >= 0; i--) {
                         if (i == 0) {
                             firstNumber = firstNumber.concat(answer.substring(i, i + 1));
@@ -154,8 +154,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             else{
-                answer=answer.substring(0,e);
-                return answer;
+                return answer.substring(0,e);
             }
         }
 
